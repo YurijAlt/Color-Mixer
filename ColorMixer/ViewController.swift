@@ -52,7 +52,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     //MARK: - Private Methods:
     
     private func updateColor() {
@@ -67,5 +66,3 @@ class ViewController: UIViewController {
     }
     
 }
-
-
