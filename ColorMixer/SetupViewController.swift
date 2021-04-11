@@ -37,8 +37,6 @@ class SetupViewController: UIViewController {
         
         redSlider.minimumTrackTintColor = .red
         greenSlider.minimumTrackTintColor = .green
-        //window.backgroundColor = color
-        
         setSliderValue()
         updateColor()
         setValue(for: redColorLabel, greenColorLabel, blueColorLabel)
