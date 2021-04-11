@@ -34,7 +34,7 @@ class SetupViewController: UIViewController {
         addDoneOnKeyboard()
         
         window.layer.cornerRadius = 15
-
+        
         redSlider.minimumTrackTintColor = .red
         greenSlider.minimumTrackTintColor = .green
         
@@ -55,10 +55,14 @@ class SetupViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        delegate.changeValues(redColor: CGFloat(redSlider.value), greenColor: CGFloat(greenSlider.value), blueColor: CGFloat(blueSlider.value))
+        delegate.changeValues(
+            redColor: CGFloat(redSlider.value),
+            greenColor: CGFloat(greenSlider.value),
+            blueColor: CGFloat(blueSlider.value)
+        )
         dismiss(animated: true)
     }
-
+    
     //MARK: - Private Methods:
     private func updateColor() {
         window.backgroundColor = UIColor(
@@ -90,15 +94,15 @@ class SetupViewController: UIViewController {
     }
     
     private func setSliderValue() {
-            var red: CGFloat = 0
-            var green: CGFloat = 0
-            var blue: CGFloat = 0
-            var alpha: CGFloat = 0
-            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         redSlider.value = Float(red)
         greenSlider.value = Float(green)
         blueSlider.value = Float(blue)
-        }
+    }
 }
 
 //MARK: - Keyboard settings
@@ -110,19 +114,12 @@ extension SetupViewController: UITextFieldDelegate {
     }
     
     @objc private func setValuesByButtonDone() {
-        redSlider.value = Float(redColorTextField.text ?? "") ?? 0.00)
+        redSlider.value = Float(redColorTextField.text ?? "") ?? 0.00
+        greenSlider.value = Float(greenColorTextField.text ?? "") ?? 0.00
+        blueSlider.value = Float(blueColorTextField.text ?? "") ?? 0.00
         updateColor()
         setValue(for: redColorLabel, greenColorLabel, blueColorLabel)
     }
-    
-    //MARK: ALERT!
-    private func showAlert(with title: String, and message: String) {
-     let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)
-     let okAction = UIAlertAction(title: "Ok", style: .cancel)
-     alert.addAction(okAction)
-     present(alert, animated: true)
-     }
-    //
     
     private func addDoneOnKeyboard() {
         let doneToolBar = UIToolbar()
@@ -138,5 +135,6 @@ extension SetupViewController: UITextFieldDelegate {
         )
         ]
     }
+    
 }
 
