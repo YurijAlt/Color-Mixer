@@ -31,9 +31,10 @@ class SetupViewController: UIViewController {
     //MARK: - Life Cicle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        addDoneOnKeyboard()
         
         window.layer.cornerRadius = 15
-        
+
         redSlider.minimumTrackTintColor = .red
         greenSlider.minimumTrackTintColor = .green
         
@@ -83,17 +84,10 @@ class SetupViewController: UIViewController {
             }
         }
     }
-
     
     private func string(from slider: UISlider) -> String {
         String(format: "%.2f", slider.value)
     }
-    
-    
-    
-    
-    
-    
     
     private func setSliderValue() {
             var red: CGFloat = 0
@@ -105,13 +99,44 @@ class SetupViewController: UIViewController {
         greenSlider.value = Float(green)
         blueSlider.value = Float(blue)
         }
-
 }
 
 //MARK: - Keyboard settings
 extension SetupViewController: UITextFieldDelegate {
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
+    
+    @objc private func setValuesByButtonDone() {
+        redSlider.value = Float(redColorTextField.text ?? "") ?? 0.00)
+        updateColor()
+        setValue(for: redColorLabel, greenColorLabel, blueColorLabel)
+    }
+    
+    //MARK: ALERT!
+    private func showAlert(with title: String, and message: String) {
+     let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)
+     let okAction = UIAlertAction(title: "Ok", style: .cancel)
+     alert.addAction(okAction)
+     present(alert, animated: true)
+     }
+    //
+    
+    private func addDoneOnKeyboard() {
+        let doneToolBar = UIToolbar()
+        doneToolBar.sizeToFit()
+        redColorTextField.inputAccessoryView = doneToolBar
+        greenColorTextField.inputAccessoryView = doneToolBar
+        blueColorTextField.inputAccessoryView = doneToolBar
+        doneToolBar.items = [UIBarButtonItem.init(
+            title: "Done",
+            style: .done,
+            target: self,
+            action: #selector(setValuesByButtonDone)
+        )
+        ]
+    }
 }
+
