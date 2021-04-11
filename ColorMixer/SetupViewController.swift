@@ -40,7 +40,6 @@ class SetupViewController: UIViewController {
         window.backgroundColor = color
         setSliderValue()
         setValue(for: redColorLabel, greenColorLabel, blueColorLabel)
-//        setValueForTF(for: redColorTextField, greenColorTextField, blueColorTextField)
         
     }
     
@@ -53,7 +52,6 @@ class SetupViewController: UIViewController {
         default: setValue(for: blueColorLabel)
         }
     }
-    
     
     @IBAction func doneButtonPressed() {
         delegate.changeValues(redColor: CGFloat(redSlider.value), greenColor: CGFloat(greenSlider.value), blueColor: CGFloat(blueSlider.value))
@@ -75,31 +73,27 @@ class SetupViewController: UIViewController {
             switch label {
             case redColorLabel:
                 label.text = string(from: redSlider)
+                redColorTextField.text = string(from: redSlider)
             case greenColorLabel:
                 label.text = string(from: greenSlider)
+                greenColorTextField.text = string(from: greenSlider)
             default:
                 label.text = string(from: blueSlider)
+                blueColorTextField.text = string(from: blueSlider)
             }
         }
     }
-    
-//    private func setValueForTF(for textFields: UITextField...) {
-//        textFields.forEach { textField in
-//            switch textField {
-//            case redColorTextField:
-//                textField.text = string(from: redSlider)
-//            case greenColorTextField:
-//                textField.text = string(from: greenSlider)
-//            default:
-//                textField.text = string(from: blueSlider)
-//            }
-//        }
-//    }
-    
+
     
     private func string(from slider: UISlider) -> String {
         String(format: "%.2f", slider.value)
     }
+    
+    
+    
+    
+    
+    
     
     private func setSliderValue() {
             var red: CGFloat = 0
@@ -121,9 +115,3 @@ extension SetupViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
 }
-
-
-
-
-
-
